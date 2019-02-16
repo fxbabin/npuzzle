@@ -10,14 +10,18 @@ def hamming(puzzle, goal):
 def manhattan(puzzle, goal):
 	distance = 0
 	size = int(sqrt(len(puzzle)))
-	for piece in puzzle:
+	for i_piece, piece in enumerate(puzzle):
 		if piece == 0:
 			continue
-		i = goal.index(piece)
-		row = int(i / size)
-		col = i % size
-		distance += row + col
+		i_goal = goal.index(piece)
+		if i_piece != i_goal:
+			row_goal = int(i_goal / size)
+			row_piece = int(i_piece / size)
+			distance += abs(row_goal - row_piece)
+			col_goal = i_goal % size
+			col_piece = i_piece % size
+			distance += abs(col_goal - col_piece)
 	return (distance)
 
 def h(puzzle, goal):
-	return (hamming(puzzle, goal))
+	return (manhattan(puzzle, goal))
