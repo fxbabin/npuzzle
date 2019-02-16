@@ -49,35 +49,3 @@ class State:
         path.reverse()
         return (path)
             
-
-"""
-puzzle = [1, 2, 3, 8, 4, 5, 7, 6, 0]
-goal = [1, 2, 3, 8, 0, 4, 7, 6, 5]
-s1 = State(puzzle, None, goal)
-print("goal  :", goal)
-print("s1")
-print("puzzle:", s1.puzzle)
-print("g:", s1.g)
-print("cost:", s1.cost)
-print("tuple:", s1.to_tuple())
-next = s1.get_next_state()
-for p in next:
-    print(p)
-"""
-
-"""
-import queue
-goal = [1, 2, 3, 8, 0, 4, 7, 6, 5]
-puzzle1 = [1, 2, 3, 8, 4, 5, 7, 0, 6]
-puzzle2 = [1, 2, 3, 8, 4, 5, 7, 6, 0]
-s1 = State(puzzle1, None, goal)
-s2 = State(puzzle2, None, goal)
-
-pq = queue.PriorityQueue()
-pq.put(s1)
-pq.put(s2)
-
-while not pq.empty():
-    state = pq.get()
-    print(state.puzzle)
-"""
