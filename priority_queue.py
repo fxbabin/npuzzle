@@ -20,3 +20,10 @@ class PriorityQueue:
         if not self.pq:
             return (True)
         return (False)
+
+    def index(self, s):
+        for t in self.pq:
+            if s.puzzle == t[2].puzzle:
+                return t[2]
+        return None
+

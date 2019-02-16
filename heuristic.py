@@ -1,6 +1,6 @@
 from math import sqrt
 
-def manning(puzzle, goal):
+def hamming(puzzle, goal):
 	count = -1
 	for i, j in zip(puzzle, goal):
 		if i != j:
@@ -20,4 +20,4 @@ def manhattan(puzzle, goal):
 	return (distance)
 
 def h(puzzle, goal):
-	return (manning(puzzle, goal))
+	return (hamming(puzzle, goal))

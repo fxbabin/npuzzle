@@ -25,7 +25,14 @@ class NPuzzle:
                     return (s)
                 if self.closed.contain(s):
                     continue
-                self.opened.push(s)
+                e = self.opened.index(s)
+                if e:
+                    if s.g < e.g:
+                        s.parent = e.parent
+                        s.g = e.g
+                        s.cost = e.cost
+                else:
+                    self.opened.push(s)
         return (None)
 
     def report(self):
