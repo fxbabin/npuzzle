@@ -1,5 +1,5 @@
-import math
-import heuristic
+from math import sqrt
+from heuristic import h
 
 class State:
 
@@ -11,7 +11,7 @@ class State:
             self.g = parent.g + 1
         else:
             self.g = 0
-        self.cost = self.g + heuristic.h(puzzle, goal)
+        self.cost = self.g + h(puzzle, goal)
         
     def move_piece(self, src, dst):
         puzzle = self.puzzle.copy()
@@ -21,7 +21,7 @@ class State:
         return state
 
     def get_next_state(self):
-        size = int(math.sqrt(len(self.puzzle)))
+        size = int(sqrt(len(self.puzzle)))
         i = self.puzzle.index(0)
         row = int(i / size)
         col = i % size

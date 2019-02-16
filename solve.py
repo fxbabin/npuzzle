@@ -1,21 +1,22 @@
 from state import State
 from priority_queue import PriorityQueue
+from hash_table import HashTable
 
 def solve(start, goal):
     opened = PriorityQueue()
     opened.push(State(goal, start, None))
-    closed = []
-    success = False
-
-    while opened and not success:
+    closed = HashTable()
+    while opened:
         curr = opened.pop()
-        closed.append(curr)
+        closed.push(curr)
         next = curr.get_next_state()
         for s in next:
             if s.puzzle == goal:
-                return s
+                return (s)
+            if closed.contain(s):
+                continue
             opened.push(s)
-    return None
+    return (None)
 
 start = [1, 2, 3, 8, 4, 5, 0, 7, 6]
 goal = [1, 2, 3, 8, 0, 4, 7, 6, 5]
