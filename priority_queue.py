@@ -15,3 +15,8 @@ class PriorityQueue:
     def pop(self):
         t = heapq.heappop(self.pq)
         return (t[2])
+    
+    def is_empty(self):
+        if not self.pq:
+            return (True)
+        return (False)
