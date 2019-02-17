@@ -11,14 +11,15 @@ class Goal:
         self.border_left = 0
         self.border_right = size - 1
         self.generate_puzzle()
+        self.puzzle = tuple(self.puzzle_list)
         self.generate_hash()
 
     def assign_num(self):
         index = self.row * self.size + self.col
         if self.num == self.len:
-            self.puzzle[index] = 0
+            self.puzzle_list[index] = 0
             return (True)
-        self.puzzle[index] = self.num
+        self.puzzle_list[index] = self.num
         self.num += 1
         return (False)
 
@@ -55,7 +56,7 @@ class Goal:
         return (False)
 
     def generate_puzzle(self):
-        self.puzzle = [None for i in range(self.len)]
+        self.puzzle_list = [None for i in range(self.len)]
         while True:
             if self.move_right():
                 return
@@ -68,5 +69,5 @@ class Goal:
 
     def generate_hash(self):
         self.hash = {}
-        for i, val in enumerate(self.puzzle):
+        for i, val in enumerate(self.puzzle_list):
             self.hash[val] = (int(i / self.size), i % self.size)

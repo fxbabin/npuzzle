@@ -16,10 +16,10 @@ class State:
     def move_piece(self, goal, h, src, dst):
         if self.parent and self.puzzle[src] == self.parent.puzzle[dst]:
             return (None)
-        puzzle = self.puzzle.copy()
+        puzzle = list(self.puzzle)
         puzzle[dst] = puzzle[src]
         puzzle[src] = 0
-        state = State(goal, h, puzzle, self)
+        state = State(goal, h, tuple(puzzle), self)
         return (state)
 
     def get_next_state(self, goal, h):

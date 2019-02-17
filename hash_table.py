@@ -7,17 +7,14 @@ class HashTable:
         self.dict = {}
 
     def push(self, s):
-        t = tuple(s.puzzle)
-        self.dict[t] = s
+        self.dict[s.puzzle] = s
 
     def get(self, s):
-        t = tuple(s.puzzle)
-        if t in self.dict:
-            return (self.dict[t])
+        if s.puzzle in self.dict:
+            return (self.dict[s.puzzle])
         return None
 
     def contain(self, s):
-        t = tuple(s.puzzle)
-        if t in self.dict:
+        if s.puzzle in self.dict:
             return (True)
         return (False)

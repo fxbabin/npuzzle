@@ -14,7 +14,7 @@ class NPuzzle:
         self.complexity_size = 1
         self.actual_size = 1
         self.opened = PriorityQueue()
-        self.opened.push(State(self.goal, self.h, setting.start, None))
+        self.opened.push(State(self.goal, self.h, tuple(setting.start), None))
         self.opened_hash = HashTable()
         self.closed = HashTable()
         if setting.start == self.goal.puzzle:
