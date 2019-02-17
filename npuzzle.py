@@ -1,5 +1,4 @@
 from goal import Goal
-from hash_table import HashTable
 from priority_queue import PriorityQueue
 from state import State
 
@@ -15,8 +14,8 @@ class NPuzzle:
         self.actual_size = 1
         self.opened = PriorityQueue()
         self.opened.push(State(self.goal, self.h, tuple(setting.start), None))
-        self.opened_hash = HashTable()
-        self.closed = HashTable()
+        self.opened_hash = {}
+        self.closed = set()
         if setting.start == self.goal.puzzle:
             self.solution = self.opened.pop()
         else:
@@ -25,7 +24,7 @@ class NPuzzle:
     def solve(self):
         while not self.opened.is_empty():
             curr = self.opened.pop()
-            self.closed.push(curr)
+            self.closed.add(curr)
             next = curr.get_next_state(self.goal, self.h)
             self.complexity_time += 1
             self.actual_size += len(next)
@@ -34,11 +33,11 @@ class NPuzzle:
             for s in next:
                 if s.puzzle == self.goal.puzzle:
                     return (s)
-                if self.closed.contain(s):
+                if s.puzzle in self.closed:
                     self.actual_size -= 1
                     continue
-                e = self.opened_hash.get(s)
-                if e:
+                if s.puzzle in self.opened_hash:
+                    e = self.opened_hash[s.puzzle]
                     if s.g < e.g:
                         s.parent = e.parent
                         s.g = e.g
@@ -46,7 +45,7 @@ class NPuzzle:
                     self.actual_size -= 1
                 else:
                     self.opened.push(s)
-                    self.opened_hash.push(s)
+                    self.opened_hash[s.puzzle] = s
         return (None)
 
     def report(self):
