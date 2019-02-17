@@ -14,11 +14,13 @@ class State:
         self.cost = self.g + h(puzzle, goal)
 
     def move_piece(self, goal, h, src, dst):
+        if self.parent and self.puzzle[src] == self.parent.puzzle[dst]:
+            return (None)
         puzzle = self.puzzle.copy()
         puzzle[dst] = puzzle[src]
         puzzle[src] = 0
         state = State(goal, h, puzzle, self)
-        return state
+        return (state)
 
     def get_next_state(self, goal, h):
         size = goal.size
@@ -27,17 +29,21 @@ class State:
         col = i % size
         next = []
         if row > 0:
-            up = self.move_piece(goal, h, (row - 1) * size + col, i)
-            next.append(up)
+            up = self.move_piece(goal, h, i - size, i)
+            if up:
+                next.append(up)
         if row < size - 1:
-            down = self.move_piece(goal, h, (row + 1) * size + col, i)
-            next.append(down)
+            down = self.move_piece(goal, h, i + size, i)
+            if down:
+                next.append(down)
         if col > 0:
-            left = self.move_piece(goal, h, row * size + col - 1, i)
-            next.append(left)
+            left = self.move_piece(goal, h, i - 1, i)
+            if left:
+                next.append(left)
         if col < size - 1:
-            right = self.move_piece(goal, h, row * size + col + 1, i)
-            next.append(right)
+            right = self.move_piece(goal, h, i + 1, i)
+            if right:
+                next.append(right)
         return (next)
 
     def get_path(self):
