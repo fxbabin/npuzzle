@@ -1,6 +1,7 @@
 from math import sqrt
 import heuristic
 
+
 class State:
 
     def __init__(self, goal, h, puzzle, parent):
@@ -11,7 +12,7 @@ class State:
         else:
             self.g = 0
         self.cost = self.g + h(puzzle, goal)
-        
+
     def move_piece(self, goal, h, src, dst):
         puzzle = self.puzzle.copy()
         puzzle[dst] = puzzle[src]
@@ -38,7 +39,7 @@ class State:
             right = self.move_piece(goal, h, row * 3 + col + 1, i)
             next.append(right)
         return (next)
-    
+
     def get_path(self):
         path = []
         curr = self
@@ -47,4 +48,3 @@ class State:
             curr = curr.parent
         path.reverse()
         return (path)
-            

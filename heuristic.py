@@ -1,24 +1,23 @@
-from math import sqrt
+from goal import Goal
+
 
 def hamming(puzzle, goal):
-	count = -1
-	for i, j in zip(puzzle, goal):
-		if i != j:
-			count += 1
-	return (count)
+    count = -1
+    for i, j in zip(puzzle, goal.puzzle):
+        if i != j:
+            count += 1
+    return (count)
+
 
 def manhattan(puzzle, goal):
-	distance = 0
-	size = int(sqrt(len(puzzle)))
-	for i_piece, piece in enumerate(puzzle):
-		if piece == 0:
-			continue
-		i_goal = goal.index(piece)
-		if i_piece != i_goal:
-			row_goal = int(i_goal / size)
-			row_piece = int(i_piece / size)
-			distance += abs(row_goal - row_piece)
-			col_goal = i_goal % size
-			col_piece = i_piece % size
-			distance += abs(col_goal - col_piece)
-	return (distance)
+    distance = 0
+    for i, val in enumerate(puzzle):
+        if val == 0:
+            continue
+        row = int(i / goal.size)
+        col = i % goal.size
+        if goal.hash[val][0] != row:
+            distance += abs(row - goal.hash[val][0])
+        if goal.hash[val][1] != col:
+            distance += abs(col - goal.hash[val][1])
+    return (distance)
