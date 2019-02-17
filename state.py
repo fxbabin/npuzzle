@@ -21,7 +21,7 @@ class State:
         return state
 
     def get_next_state(self, goal, h):
-        size = int(sqrt(len(self.puzzle)))
+        size = goal.size
         i = self.puzzle.index(0)
         row = int(i / size)
         col = i % size
@@ -33,10 +33,10 @@ class State:
             down = self.move_piece(goal, h, (row + 1) * size + col, i)
             next.append(down)
         if col > 0:
-            left = self.move_piece(goal, h, row * 3 + col - 1, i)
+            left = self.move_piece(goal, h, row * size + col - 1, i)
             next.append(left)
         if col < size - 1:
-            right = self.move_piece(goal, h, row * 3 + col + 1, i)
+            right = self.move_piece(goal, h, row * size + col + 1, i)
             next.append(right)
         return (next)
 
