@@ -14,6 +14,7 @@ class NPuzzle:
         self.actual_size = 1
         self.opened = PriorityQueue()
         self.opened.push(State(self.goal, h, start, None))
+        self.opened_hash = HashTable()
         self.closed = HashTable()
         self.solution = self.solve()
 
@@ -75,7 +76,7 @@ class NPuzzle:
                 if self.closed.contain(s):
                     self.actual_size -= 1
                     continue
-                e = self.opened.index(s)
+                e = self.opened_hash.get(s)
                 if e:
                     if s.g < e.g:
                         s.parent = e.parent
@@ -84,6 +85,7 @@ class NPuzzle:
                     self.actual_size -= 1
                 else:
                     self.opened.push(s)
+                    self.opened_hash.push(s)
         return (None)
 
     def report(self):

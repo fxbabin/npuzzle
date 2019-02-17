@@ -9,8 +9,11 @@ class HashTable:
         t = tuple(s.puzzle)
         self.dict[t] = s
     
-    def get(self, key):
-        return (self.dict[key])
+    def get(self, s):
+        t = tuple(s.puzzle)
+        if t in self.dict:
+            return (self.dict[t])
+        return None
 
     def contain(self, s):
         t = tuple(s.puzzle)
