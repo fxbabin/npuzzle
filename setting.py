@@ -14,6 +14,7 @@ class Setting:
         self.start = []
         self.size = 0
         self.puzzle_parsing(self.file)
+        self.check_solvability()
 
     def check_arguments(self, args=None):
         """
@@ -64,8 +65,21 @@ class Setting:
                     print("Error : line size differs from the "
                           "indicated size of puzzle")
                     sys.exit(-1)
-                for e in line_split:
-                    self.start.append(int(e))
+                for letter in line_split:
+                    self.start.append(int(letter))
+    
+    def check_solvability(self):
+        permutations = 0
+        i = 0
+        for curr_tile in self.start:
+            for tile in self.start[i+1:]:
+                if curr_tile > tile and tile != 0:
+                    permutations += 1
+            i += 1
+        if permutations % 2 == 0:
+            print("Error : unsolvable puzzle !")
+            sys.exit(-1)
+        return (True)
 
     def choose_heuristic_function(self):
         if self.heuristic == 'hamming':
