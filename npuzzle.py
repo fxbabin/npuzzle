@@ -28,7 +28,6 @@ class NPuzzle:
             self.closed.push(curr)
             next = curr.get_next_state(self.goal, self.h)
             self.complexity_time += 1
-            print(self.complexity_time)
             self.actual_size += len(next)
             if self.actual_size > self.complexity_size:
                 self.complexity_size = self.actual_size
