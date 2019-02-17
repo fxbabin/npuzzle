@@ -6,15 +6,15 @@ from state import State
 
 class NPuzzle:
 
-    def __init__(self, start, h):
-        self.size = 3
+    def __init__(self, setting):
+        self.size = setting.size
         self.goal = Goal(self.size)
-        self.h = h
+        self.h = setting.h
         self.complexity_time = 0
         self.complexity_size = 1
         self.actual_size = 1
         self.opened = PriorityQueue()
-        self.opened.push(State(self.goal, h, start, None))
+        self.opened.push(State(self.goal, self.h, setting.start, None))
         self.opened_hash = HashTable()
         self.closed = HashTable()
         self.solution = self.solve()
