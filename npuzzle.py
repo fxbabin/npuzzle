@@ -2,18 +2,63 @@ from state import State
 from priority_queue import PriorityQueue
 from hash_table import HashTable
 
+
 class NPuzzle:
 
-    def __init__(self, start, goal, h):
-        self.goal = goal
+    def __init__(self, start, h):
+        self.size = 3
+        self.generate_goal()
         self.h = h
         self.complexity_time = 0
         self.complexity_size = 1
         self.actual_size = 1
         self.opened = PriorityQueue()
-        self.opened.push(State(goal, h, start, None))
+        self.opened.push(State(self.goal, h, start, None))
         self.closed = HashTable()
         self.solution = self.solve()
+
+    def generate_goal(self):
+        self.goal = [None for i in range(self.size * self.size)]
+        row = 0
+        col = -1
+        border_left = 0
+        border_right = self.size - 1
+        border_top = 1
+        border_bottom = self.size - 1
+        i = 1
+        while True:
+            while col < border_right:
+                col += 1
+                if i == self.size * self.size:
+                    self.goal[row * self.size + col] = 0
+                    return
+                self.goal[row * self.size + col] = i
+                i += 1
+            border_right -= 1
+            while row < border_bottom:
+                row += 1
+                if i == self.size * self.size:
+                    self.goal[row * self.size + col] = 0
+                    return
+                self.goal[row * self.size + col] = i
+                i += 1
+            border_bottom -= 1
+            while col > border_left:
+                col -= 1
+                if i == self.size * self.size:
+                    self.goal[row * self.size + col] = 0
+                    return
+                self.goal[row * self.size + col] = i
+                i += 1
+            border_left += 1
+            while row > border_top:
+                row -= 1
+                if i == self.size * self.size:
+                    self.goal[row * self.size + col] = 0
+                    return
+                self.goal[row * self.size + col] = i
+                i += 1
+            border_top += 1
 
     def solve(self):
         while not self.opened.is_empty():

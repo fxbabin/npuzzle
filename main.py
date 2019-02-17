@@ -1,7 +1,9 @@
 from npuzzle import NPuzzle
 import heuristic
 
-start = [7, 6, 2, 5, 3, 1, 0, 4, 8]
-goal = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-puzzle = NPuzzle(start, goal, heuristic.hamming)
+# unsolvable
+# start = [5, 2, 7, 1, 3, 6, 0, 4, 8]
+# easy
+start = [1, 2, 3, 8, 4, 5, 0, 7, 6]
+puzzle = NPuzzle(start, heuristic.hamming)
 puzzle.report()
