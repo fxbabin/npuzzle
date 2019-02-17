@@ -17,7 +17,10 @@ class NPuzzle:
         self.opened.push(State(self.goal, self.h, setting.start, None))
         self.opened_hash = HashTable()
         self.closed = HashTable()
-        self.solution = self.solve()
+        if setting.start == self.goal.puzzle:
+            self.solution = self.opened.pop()
+        else:
+            self.solution = self.solve()
 
     def solve(self):
         while not self.opened.is_empty():
