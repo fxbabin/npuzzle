@@ -22,6 +22,3 @@ def manhattan(puzzle, goal):
 			col_piece = i_piece % size
 			distance += abs(col_goal - col_piece)
 	return (distance)
-
-def h(puzzle, goal):
-	return (manhattan(puzzle, goal))

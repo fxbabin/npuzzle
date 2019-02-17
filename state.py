@@ -1,10 +1,9 @@
 from math import sqrt
-from heuristic import h
+import heuristic
 
 class State:
 
-    def __init__(self, goal, puzzle, parent):
-        self.goal = goal
+    def __init__(self, goal, h, puzzle, parent):
         self.puzzle = puzzle
         self.parent = parent
         if parent:
@@ -13,30 +12,30 @@ class State:
             self.g = 0
         self.cost = self.g + h(puzzle, goal)
         
-    def move_piece(self, src, dst):
+    def move_piece(self, goal, h, src, dst):
         puzzle = self.puzzle.copy()
         puzzle[dst] = puzzle[src]
         puzzle[src] = 0
-        state = State(self.goal, puzzle, self)
+        state = State(goal, h, puzzle, self)
         return state
 
-    def get_next_state(self):
+    def get_next_state(self, goal, h):
         size = int(sqrt(len(self.puzzle)))
         i = self.puzzle.index(0)
         row = int(i / size)
         col = i % size
         next = []
         if row > 0:
-            up = self.move_piece((row - 1) * size + col, i)
+            up = self.move_piece(goal, h, (row - 1) * size + col, i)
             next.append(up)
         if row < size - 1:
-            down = self.move_piece((row + 1) * size + col, i)
+            down = self.move_piece(goal, h, (row + 1) * size + col, i)
             next.append(down)
         if col > 0:
-            left = self.move_piece(row * 3 + col - 1, i)
+            left = self.move_piece(goal, h, row * 3 + col - 1, i)
             next.append(left)
         if col < size - 1:
-            right = self.move_piece(row * 3 + col + 1, i)
+            right = self.move_piece(goal, h, row * 3 + col + 1, i)
             next.append(right)
         return (next)
     

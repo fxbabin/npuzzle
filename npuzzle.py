@@ -4,13 +4,14 @@ from hash_table import HashTable
 
 class NPuzzle:
 
-    def __init__(self, start, goal):
+    def __init__(self, start, goal, h):
         self.goal = goal
+        self.h = h
         self.complexity_time = 0
         self.complexity_size = 1
         self.actual_size = 1
         self.opened = PriorityQueue()
-        self.opened.push(State(goal, start, None))
+        self.opened.push(State(goal, h, start, None))
         self.closed = HashTable()
         self.solution = self.solve()
 
@@ -18,7 +19,7 @@ class NPuzzle:
         while not self.opened.is_empty():
             curr = self.opened.pop()
             self.closed.push(curr)
-            next = curr.get_next_state()
+            next = curr.get_next_state(self.goal, self.h)
             self.complexity_time += 1
             self.actual_size += len(next)
             if self.actual_size > self.complexity_size:
