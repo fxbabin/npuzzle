@@ -2,7 +2,7 @@ import argparse
 import sys
 from pathlib import Path
 import heuristic
-
+import re
 
 class Setting:
 
@@ -47,20 +47,22 @@ class Setting:
         """
         with open(npuzzle_filename, 'r') as in_file:
             for line in in_file:
+                line = line.strip()
                 if line[0] == '#':
                     continue
-                line_split = line.split(' ')
+                line_split = re.sub(' +',' ', line).split(' ')
                 if len(line_split) == 1:
                     self.size = int(line_split[0])
                     break
 
             for line in in_file:
+                line = line.strip()
                 for letter in line:
                     if letter not in "0123456789 \n":
                         print("Error : \'{}\' wrong character "
                               "in puzzle line".format(letter))
                         sys.exit(-1)
-                line_split = line.split(' ')
+                line_split = re.sub(' +',' ', line).split(' ')
                 if len(line_split) != self.size:
                     print("Error : line size differs from the "
                           "indicated size of puzzle")
