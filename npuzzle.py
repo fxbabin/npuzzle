@@ -6,7 +6,6 @@ from state import State
 class NPuzzle:
 
     def __init__(self, setting):
-        self.size = setting.size
         self.goal = setting.goal
         self.complexity_time = 0
         self.complexity_size = 1

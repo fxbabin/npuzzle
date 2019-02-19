@@ -1,5 +1,6 @@
 from math import sqrt
 
+
 class State:
 
     def __init__(self, setting, puzzle, parent):

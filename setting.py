@@ -5,10 +5,11 @@ import heuristic
 import re
 from goal import Goal
 
+
 class Setting:
 
     def __init__(self):
-        self.algorithm = 'uniform'
+        self.algorithm = ''
         self.heuristic = ''
         self.file = ''
         self.check_arguments(sys.argv[1:])
@@ -19,7 +20,7 @@ class Setting:
         self.h = self.choose_heuristic_function()
         self.cost_function = self.create_cost_function()
         self.create_cost_function()
-        #self.check_solvability()
+        # self.check_solvability()
 
     def check_arguments(self, args=None):
         """
@@ -27,7 +28,7 @@ class Setting:
             :param args=None: arguments of the program
         """
         possible_algorithms = ['astar', 'greedy', 'uniform']
-        possible_heuristics = ["hamming", "manhattan"]
+        possible_heuristics = ['hamming', 'manhattan']
         parser = argparse.ArgumentParser(description='Npuzzle program.')
         parser.add_argument('-A', '--algorithm', help='algorithm',
                             required=False, default='astar')
@@ -64,7 +65,7 @@ class Setting:
                 line = line.strip()
                 if line[0] == '#':
                     continue
-                line_split = re.sub(' +',' ', line).split(' ')
+                line_split = re.sub(' +', ' ', line).split(' ')
                 if len(line_split) == 1:
                     self.size = int(line_split[0])
                     break
@@ -76,14 +77,14 @@ class Setting:
                         print("Error : \'{}\' wrong character "
                               "in puzzle line".format(letter))
                         sys.exit(-1)
-                line_split = re.sub(' +',' ', line).split(' ')
+                line_split = re.sub(' +', ' ', line).split(' ')
                 if len(line_split) != self.size:
                     print("Error : line size differs from the "
                           "indicated size of puzzle")
                     sys.exit(-1)
                 for letter in line_split:
                     self.start.append(int(letter))
-    
+
     def check_solvability(self):
         permutations = 0
         i = 0
@@ -119,8 +120,8 @@ class Setting:
 
     def create_cost_function(self):
         if self.algorithm == 'astar':
-            return (lambda g, puzzle : g + self.h(puzzle, self.goal))
+            return (lambda g, puzzle: g + self.h(puzzle, self.goal))
         elif self.algorithm == 'uniform':
-            return (lambda g, puzzle : g)
+            return (lambda g, puzzle: g)
         elif self.algorithm == 'greedy':
-            return (lambda g, puzzle : self.h(puzzle, self.goal))
+            return (lambda g, puzzle: self.h(puzzle, self.goal))
