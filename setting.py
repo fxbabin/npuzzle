@@ -20,7 +20,14 @@ class Setting:
         self.h = self.choose_heuristic_function()
         self.cost_function = self.create_cost_function()
         self.create_cost_function()
-        # self.check_solvability()
+        goal_solvability = self.is_solvable(self.goal.puzzle)
+        start_solvability = self.is_solvable(self.start)
+        if goal_solvability is False:
+            start_solvability = not start_solvability
+        if start_solvability is False:
+            print("Error: Puzzle is unsolvable")
+            sys.exit(-1)
+        # print("solvable")
 
     def check_arguments(self, args=None):
         """
@@ -85,31 +92,28 @@ class Setting:
                 for letter in line_split:
                     self.start.append(int(letter))
 
-    def check_solvability(self):
+    def is_solvable(self, puzzle):
         permutations = 0
         i = 0
         zero_line_nb = 0
-        for curr_tile in self.start:
-            for tile in self.start[i+1:]:
+        for curr_tile in puzzle:
+            for tile in puzzle[i+1:]:
                 if curr_tile > tile and tile != 0:
                     permutations += 1
             if curr_tile == 0:
-                zero_line_nb = (self.size - 1) - (i / self.size)
+                zero_line_nb = (self.size - 1) - int(i / self.size)
             i += 1
 
         if self.size % 2 == 0:
             if zero_line_nb % 2 == 0:
                 if permutations % 2 == 0:
-                    print("Error : unsolvable puzzle !")
-                    sys.exit(-1)
+                    return (False)
             else:
                 if permutations % 2 != 0:
-                    print("Error : unsolvable puzzle !")
-                    sys.exit(-1)
+                    return (False)
         else:
             if permutations % 2 != 0:
-                print("Error : unsolvable puzzle !")
-                sys.exit(-1)
+                return (False)
         return (True)
 
     def choose_heuristic_function(self):
@@ -125,3 +129,4 @@ class Setting:
             return (lambda g, puzzle: g)
         elif self.algorithm == 'greedy':
             return (lambda g, puzzle: self.h(puzzle, self.goal))
+
