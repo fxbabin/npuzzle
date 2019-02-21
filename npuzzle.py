@@ -6,14 +6,12 @@ from state import State
 class NPuzzle:
 
     def __init__(self, setting):
-        self.size = setting.size
-        self.goal = Goal(self.size)
-        self.h = setting.h
+        self.goal = setting.goal
         self.complexity_time = 0
         self.complexity_size = 1
         self.actual_size = 1
         self.opened = PriorityQueue()
-        self.opened.push(State(self.goal, self.h, tuple(setting.start), None))
+        self.opened.push(State(setting, tuple(setting.start), None))
         self.opened_hash = {}
         self.closed = set()
         if setting.start == self.goal.puzzle:
@@ -25,7 +23,7 @@ class NPuzzle:
         while not self.opened.is_empty():
             curr = self.opened.pop()
             self.closed.add(curr)
-            next = curr.get_next_state(self.goal, self.h)
+            next = curr.get_next_state()
             self.complexity_time += 1
             self.actual_size += len(next)
             if self.actual_size > self.complexity_size:
