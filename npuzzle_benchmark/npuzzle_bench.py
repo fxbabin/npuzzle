@@ -1,13 +1,11 @@
 
 import subprocess
 import os
-from setting import Setting
+from benchmark import Benchmark
 import subprocess
 
 def main():
-    setting = Setting()
-    #occurences, size = check_arguments(sys.argv[1:])
-
+    Benchmark()
 
 if __name__ == "__main__":
     main()

@@ -6,18 +6,16 @@ import time
 import numpy as np
 import subprocess
 
-class Setting:
+class Benchmark:
 
     def __init__(self):
         self.occurences = 0
         self.size = 0
         self.iterations = 0
         self.check_arguments(sys.argv[1:])
-        #self.generate_puzzles()
+        self.generate_puzzles()
         self.testing_puzzle(solvable="unsolvable", heuristic="manhattan")
-        #self.testing_puzzle(solvable="unsolvable", heuristic="hamming")
         self.testing_puzzle(solvable="solvable", heuristic="manhattan")
-        #self.testing_puzzle(solvable="solvable", heuristic="hamming")
 
     def check_arguments(self, args=None):
         parser = argparse.ArgumentParser(description='Npuzzle benchmarking program.')
