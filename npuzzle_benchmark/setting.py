@@ -15,8 +15,8 @@ class Setting:
         self.check_arguments(sys.argv[1:])
         #self.generate_puzzles()
         self.testing_puzzle(solvable="unsolvable", heuristic="manhattan")
-        self.testing_puzzle(solvable="unsolvable", heuristic="hamming")
-        #self.testing_puzzle(solvable="solvable", heuristic="manhattan")
+        #self.testing_puzzle(solvable="unsolvable", heuristic="hamming")
+        self.testing_puzzle(solvable="solvable", heuristic="manhattan")
         #self.testing_puzzle(solvable="solvable", heuristic="hamming")
 
     def check_arguments(self, args=None):
@@ -49,11 +49,8 @@ Benchmarking of solvable and unsolvable npuzzles parameters:
     def testing_puzzle(self, solvable="solvable", heuristic="manhattan"):
         unsolvable_outputs = []
         print("Testing "+solvable+" puzzles for "+heuristic+" heuristic ...")
-        for i in range(self.occurences):
-            #subprocess.run(["python ../main.py -H "+heuristic+" -f tests/"+solvable+"_"+str(i)+".txt"], shell=True)
+        for i in tqdm(range(self.occurences)):
             unsolvable_outputs.append(subprocess.run(["time python ../main.py -H "+heuristic+" -f tests/"+solvable+"_"+str(i)+".txt"], shell=True, capture_output=True))
-        #for elem in unsolvable_outputs:
-        #    print(elem.stdout)
         unsolvable_times = np.array([float(elem.stderr.split()[3][2:-1]) for elem in unsolvable_outputs])
         error = 0
         total = 0
