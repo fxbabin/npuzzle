@@ -70,33 +70,65 @@ class Setting:
                 for letter in line_split:
                     self.start.append(int(letter))
     
+    # def check_solvability(self):
+    #     permutations = 0
+    #     i = 0
+    #     zero_line_nb = 0
+    #     for curr_tile in self.start:
+    #         #print(curr_tile)
+    #         for tile in self.start[i+1:]:
+    #             if curr_tile > tile and tile != 0:
+    #                 permutations += 1
+    #         if 0 == curr_tile:
+    #             #print(i)
+    #             zero_line_nb = (self.size - int(i / (self.size))) - 1
+    #         i += 1
+    #         #print(i)
+    #     #print(zero_line_nb, permutations)
+        
+    #     if self.size % 2 == 0:
+    #         if zero_line_nb % 2 == 0:
+    #             if permutations % 2 == 0:
+    #                 print("-1")
+    #                 sys.exit(0)
+    #         else:
+    #             if permutations % 2 != 0:
+    #                 print("-1")
+    #                 sys.exit(0)
+    #     else:
+    #         if permutations % 2 == 0:
+    #             print("-1")
+    #             sys.exit(0)
+    #     print("0")
+    #     sys.exit(0)
+    #     #print(zero_line_nb, permutations)
+    #     #return (True)
+
+
     def check_solvability(self):
         permutations = 0
         i = 0
-        zero_line_nb = 0
+        #zero_line_nb = 0
         for curr_tile in self.start:
-            for tile in self.start[i+1:]:
-                if curr_tile > tile and tile != 0:
+            #print(curr_tile)
+            for tile in self.start[:i]:
+                if tile > curr_tile and curr_tile != 0:
                     permutations += 1
-            if curr_tile == 0:
-                zero_line_nb = (self.size - 1) - (i / self.size)
+            #if 0 == curr_tile:
+                #print(i)
+                #zero_line_nb = (self.size - int(i / (self.size))) - 1
             i += 1
-
+            #print(i)
+        #print(zero_line_nb, permutations)
+        
         if self.size % 2 == 0:
-            if zero_line_nb % 2 == 0:
-                if permutations % 2 == 0:
-                    print("Error : unsolvable puzzle !")
-                    sys.exit(-1)
-            else:
-                if permutations % 2 != 0:
-                    print("Error : unsolvable puzzle !")
-                    sys.exit(-1)
+            print("0")
         else:
-            if permutations % 2 != 0:
-                print("Error : unsolvable puzzle !")
-                sys.exit(-1)
-        return (True)
-
+            print("==> 1 <==")
+        sys.exit(0)
+        #print(zero_line_nb, permutations)
+        #return (True)
+    
     def choose_heuristic_function(self):
         if self.heuristic == 'hamming':
             return (heuristic.hamming)
