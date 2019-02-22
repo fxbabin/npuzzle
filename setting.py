@@ -43,6 +43,8 @@ class Setting:
                             required=False, default='manhattan')
         parser.add_argument('-f', '--file', help='input npuzzle file',
                             required=True)
+        parser.add_argument('-g', '--graphic', help='graphic',
+                            required=False, action='store_true')
         res = parser.parse_args(args)
 
         if res.algorithm not in possible_algorithms:
@@ -61,6 +63,7 @@ class Setting:
         self.algorithm = res.algorithm
         self.heuristic = res.heuristic
         self.file = res.file
+        self.graphic = res.graphic
 
     def puzzle_parsing(self, npuzzle_filename: str):
         """

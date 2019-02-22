@@ -6,8 +6,10 @@ from graphic import Graphic
 def main():
     setting = Setting()
     npuzzle = NPuzzle(setting)
-    Graphic(npuzzle)
-    # npuzzle.report()
+    if setting.graphic:
+        Graphic(npuzzle)
+    else:
+        npuzzle.report()
 
 if __name__ == "__main__":
     main()
