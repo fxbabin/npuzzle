@@ -1,3 +1,5 @@
+import operator
+
 def hamming(puzzle, goal):
     count = -1
     for i, j in zip(puzzle, goal.puzzle):
@@ -41,19 +43,18 @@ def manhattan(puzzle, goal):
     return (distance)
 
 
-def get_conflict(puzzle_row, goal_row, size):
+def get_conflict(puzzle, goal, size):
     count = [0] * size
     conflict = []
-    for j, tj in enumerate(puzzle_row):
+    for i in range(size):
         conflict.append([])
-        for k, tk in enumerate(puzzle_row):
-            if tj == 0 or tk == 0:
+    for j in range(1, size):
+        if puzzle[j] == 0 or puzzle[j] not in goal:
+            continue
+        for k in range(j):
+            if puzzle[k] == 0 or puzzle[k] not in goal:
                 continue
-            if j <= k:
-                continue
-            if tj not in goal_row or tk not in goal_row:
-                continue
-            if goal_row.index(tj) >= goal_row.index(tk):
+            if goal.index(puzzle[j]) >= goal.index(puzzle[k]):
                 continue
             count[j] += 1
             count[k] += 1
@@ -65,8 +66,10 @@ def get_conflict(puzzle_row, goal_row, size):
 def calculate_lc(puzzle_row, goal_row, size):
     lc = 0
     count, conflict = get_conflict(puzzle_row, goal_row, size)
-    while sum(count) > 0:
-        max_index = count.index(max(count))
+    sum_count = sum(count)
+    while sum_count > 0:
+        max_index, _ = max(enumerate(count), key=operator.itemgetter(1))
+        sum_count -= count[max_index] * 2
         count[max_index] = 0
         for i in conflict[max_index]:
             count[i] -= 1
