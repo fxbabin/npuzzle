@@ -6,6 +6,27 @@ def hamming(puzzle, goal):
     return (count)
 
 
+def relaxed_adjacency(puzzle, goal):
+    count = 0
+    tmp = list(puzzle[:])
+    goal_zero = goal.puzzle_list.index(0)
+    while not tmp == goal.puzzle_list:
+        puzzle_zero = tmp.index(0)
+        if puzzle_zero == goal_zero:
+            index = None
+            for idx, (i, j) in enumerate(zip(tmp, goal.puzzle_list)):
+                if i != j:
+                    index = idx
+                    break
+            tmp[puzzle_zero], tmp[index] = tmp[index], tmp[puzzle_zero]
+        else:
+            x = goal.puzzle_list[puzzle_zero]
+            x_index = tmp.index(x)
+            tmp[puzzle_zero], tmp[x_index] = tmp[x_index], tmp[puzzle_zero]
+        count += 1
+    return (count)
+
+
 def manhattan(puzzle, goal):
     distance = 0
     for i, val in enumerate(puzzle):

@@ -35,7 +35,7 @@ class Setting:
             :param args=None: arguments of the program
         """
         possible_algorithms = ['astar', 'greedy', 'uniform']
-        possible_heuristics = ['hamming', 'manhattan', 'linear']
+        possible_heuristics = ['hamming', 'relaxed', 'manhattan', 'linear']
         parser = argparse.ArgumentParser(description='Npuzzle program.')
         parser.add_argument('-A', '--algorithm', help='algorithm',
                             required=False, default='astar')
@@ -124,6 +124,8 @@ class Setting:
     def choose_heuristic_function(self):
         if self.heuristic == 'hamming':
             return (heuristic.hamming)
+        elif self.heuristic == 'relaxed':
+            return (heuristic.relaxed_adjacency)
         elif self.heuristic == 'manhattan':
             return (heuristic.manhattan)
         elif self.heuristic == 'linear':
