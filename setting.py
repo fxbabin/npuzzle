@@ -25,9 +25,7 @@ class Setting:
         if goal_solvability is False:
             start_solvability = not start_solvability
         if start_solvability is False:
-            print("Error: Puzzle is unsolvable")
-            sys.exit(-1)
-        # print("solvable")
+            raise Exception("Error: Puzzle is unsolvable")
 
     def check_arguments(self, args=None):
         """
@@ -58,8 +56,7 @@ class Setting:
                 print(e)
             sys.exit(-1)
         if not Path(res.file).is_file():
-            print("Error : File \'{}\' is not a file !".format(res.file))
-            sys.exit(-1)
+            raise Exception("Error : File \'{}\' is not a file !".format(res.file))
         self.algorithm = res.algorithm
         self.heuristic = res.heuristic
         self.file = res.file
@@ -71,6 +68,7 @@ class Setting:
             :param npuzzle_filename:str: filename for npuzzle file
         """
         with open(npuzzle_filename, 'r') as in_file:
+            has_line_nb = False
             for line in in_file:
                 line = line.strip()
                 if line[0] == '#':
@@ -78,20 +76,20 @@ class Setting:
                 line_split = re.sub(' +', ' ', line).split(' ')
                 if len(line_split) == 1:
                     self.size = int(line_split[0])
+                    has_line_nb = True
                     break
-
+            if has_line_nb is False:
+                raise Exception("Error : could not find size.")
             for line in in_file:
                 line = line.strip()
                 for letter in line:
                     if letter not in "0123456789 \n":
-                        print("Error : \'{}\' wrong character "
+                        raise Exception("Error : \'{}\' wrong character "
                               "in puzzle line".format(letter))
-                        sys.exit(-1)
                 line_split = re.sub(' +', ' ', line).split(' ')
                 if len(line_split) != self.size:
-                    print("Error : line size differs from the "
+                    raise Exception("Error : line size differs from the "
                           "indicated size of puzzle")
-                    sys.exit(-1)
                 for letter in line_split:
                     self.start.append(int(letter))
 
@@ -106,9 +104,6 @@ class Setting:
             if curr_tile == 0:
                 zero_line_nb = (self.size - 1) - int(i / self.size)
             i += 1
-            # print(i)
-        # print(zero_line_nb, permutations)
-
         if self.size % 2 == 0:
             if zero_line_nb % 2 == 0:
                 if permutations % 2 == 0:
