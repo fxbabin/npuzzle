@@ -78,8 +78,10 @@ class Setting:
                     self.size = int(line_split[0])
                     has_line_nb = True
                     break
+            if self.size < 3:
+                raise Exception("Error : size less than 3")
             if has_line_nb is False:
-                raise Exception("Error : could not find size.")
+                raise Exception("Error : could not find size")
             for line in in_file:
                 line = line.strip()
                 for letter in line:

@@ -13,9 +13,12 @@ class Benchmark:
         self.size = 0
         self.iterations = 0
         self.check_arguments(sys.argv[1:])
-        self.generate_puzzles()
-        self.testing_puzzle(solvable="unsolvable", heuristic="manhattan")
+        #self.generate_puzzles()
+        #self.testing_puzzle(solvable="unsolvable", heuristic="hamming")
+        # self.testing_puzzle(solvable="solvable", heuristic="hamming")
+        # self.testing_puzzle(solvable="solvable", heuristic="relaxed")
         self.testing_puzzle(solvable="solvable", heuristic="manhattan")
+        # self.testing_puzzle(solvable="solvable", heuristic="linear")
 
     def check_arguments(self, args=None):
         parser = argparse.ArgumentParser(description='Npuzzle benchmarking program.')
@@ -49,18 +52,19 @@ Benchmarking of solvable and unsolvable npuzzles parameters:
         print("Testing "+solvable+" puzzles for "+heuristic+" heuristic ...")
         for i in tqdm(range(self.occurences)):
             unsolvable_outputs.append(subprocess.run(["time python ../main.py -H "+heuristic+" -f tests/"+solvable+"_"+str(i)+".txt"], shell=True, capture_output=True))
-        unsolvable_times = np.array([float(elem.stderr.split()[3][2:-1]) for elem in unsolvable_outputs])
-        error = 0
-        total = 0
+        unsolvable_times = [] 
         for elem in unsolvable_outputs:
-            if (elem.stdout[:7]).decode("utf-8") == "Error :":
-                error += 1
-            total += 1
+            time = elem.stderr.split()[-3].decode("utf-8")
+            time_split = time.split('m')
+            time_out = float(time_split[0]) * 60 + float(time_split[1][:-1])
+            unsolvable_times.append(time_out)
+        unsolvable_times = np.array(unsolvable_times)
+        for elem in unsolvable_outputs:
+            if (elem.stdout[:7]).decode("utf-8") == "Error :" and solvable == "solvable":
+                print(elem.stdout)
             
         print('''
 Results for '''+solvable+''' npuzzles:
-
-    success_rate : '''+str(100 * (total - error) / total)+'''%
 
     average_time : '''+str(np.around(unsolvable_times.mean(), decimals=4))+''' seconds
     minimum_time : '''+str(np.around(unsolvable_times.min(), decimals=4))+''' seconds

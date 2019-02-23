@@ -14,7 +14,7 @@ class NPuzzle:
         self.opened.push(State(setting, tuple(setting.start), None))
         self.opened_hash = {}
         self.closed = set()
-        if setting.start == self.goal.puzzle:
+        if setting.start == self.goal.puzzle_list:
             self.solution = self.opened.pop()
         else:
             self.solution = self.solve()
@@ -55,4 +55,4 @@ class NPuzzle:
             for step in self.solution.get_path():
                 print(step)
         else:
-            print("The puzzle is unsolvable")
+            print("Error : The puzzle is unsolvable")
