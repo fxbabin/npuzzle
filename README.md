@@ -2,7 +2,7 @@
 
 Usage:
 ```
-python3 main.py [-A astar|uniform|greedy] [-H hamming|manhattan] -f puzzle_file
+python3 main.py [-A astar|uniform|greedy] [-H hamming|manhattan|linear] [-g] -f puzzle_file
 ```
 
 Examples:

@@ -35,12 +35,12 @@ class Setting:
             :param args=None: arguments of the program
         """
         possible_algorithms = ['astar', 'greedy', 'uniform']
-        possible_heuristics = ['hamming', 'manhattan']
+        possible_heuristics = ['hamming', 'manhattan', 'linear']
         parser = argparse.ArgumentParser(description='Npuzzle program.')
         parser.add_argument('-A', '--algorithm', help='algorithm',
                             required=False, default='astar')
         parser.add_argument('-H', '--heuristic', help='heuristic function',
-                            required=False, default='manhattan')
+                            required=False, default='linear')
         parser.add_argument('-f', '--file', help='input npuzzle file',
                             required=True)
         parser.add_argument('-g', '--graphic', help='graphic',
@@ -106,9 +106,9 @@ class Setting:
             if curr_tile == 0:
                 zero_line_nb = (self.size - 1) - int(i / self.size)
             i += 1
-            #print(i)
-        #print(zero_line_nb, permutations)
-        
+            # print(i)
+        # print(zero_line_nb, permutations)
+
         if self.size % 2 == 0:
             if zero_line_nb % 2 == 0:
                 if permutations % 2 == 0:
@@ -126,6 +126,8 @@ class Setting:
             return (heuristic.hamming)
         elif self.heuristic == 'manhattan':
             return (heuristic.manhattan)
+        elif self.heuristic == 'linear':
+            return (heuristic.linear_conflict)
 
     def create_cost_function(self):
         if self.algorithm == 'astar':
@@ -134,4 +136,3 @@ class Setting:
             return (lambda g, puzzle: g)
         elif self.algorithm == 'greedy':
             return (lambda g, puzzle: self.h(puzzle, self.goal))
-

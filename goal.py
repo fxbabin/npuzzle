@@ -13,6 +13,9 @@ class Goal:
         self.generate_puzzle()
         self.puzzle = tuple(self.puzzle_list)
         self.generate_hash()
+        self.rows = []
+        self.cols = []
+        self.generate_rows_cols()
 
     def assign_num(self):
         index = self.row * self.size + self.col
@@ -71,3 +74,26 @@ class Goal:
         self.hash = {}
         for i, val in enumerate(self.puzzle_list):
             self.hash[val] = (int(i / self.size), i % self.size)
+
+    def generate_lc_hash(self):
+
+        self.lc_hash = {}
+        for val in self.puzzle_list:
+            row = self.hash[val][0]
+            col = self.hash[val][1]
+            tmp_1 = self.puzzle_list[row * self.size:(row + 1) * self.size]
+            tmp_2 = []
+            for y in range(self.size):
+                tmp_2.append(self.puzzle_list[col + (y * self.size)])
+            self.lc_hash[val] = (tmp_1, tmp_2)
+            print(self.lc_hash[val])
+
+    def generate_rows_cols(self):
+        for i in range(self.size):
+            tmp = self.puzzle_list[i * self.size:(i + 1) * self.size]
+            self.rows.append(tmp)
+        for i in range(self.size):
+            tmp = []
+            for y in range(self.size):
+                tmp.append(self.puzzle_list[i + (y * self.size)])
+            self.cols.append(tmp)
