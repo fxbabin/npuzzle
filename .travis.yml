@@ -4,4 +4,4 @@ python:
 install:
   - pip install pep8
 script:
-  - pep8 parsing.py
+  - pep8 *.py
