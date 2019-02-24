@@ -1,5 +1,6 @@
 import tkinter as tk
 
+
 class Graphic:
 
     def __init__(self, npuzzle):
@@ -20,13 +21,13 @@ class Graphic:
         self.add_buttons()
         self.add_data()
         self.root.mainloop()
-    
+
     def add_window(self):
         self.root = tk.Tk()
         self.root.title(str(self.max_num) + " Puzzle")
         self.window = tk.Frame(self.root, padx=50, pady=50)
         self.window.pack()
-    
+
     def add_board(self):
         container = tk.Frame(self.window)
         container.grid(row=0, column=0, columnspan=3)
@@ -40,29 +41,43 @@ class Graphic:
             r = int(i / self.size)
             c = i % self.size
             if val == 0:
-                self.pieces.append(tk.Frame(self.board, background='grey30', width=self.piece_pixel, height=self.piece_pixel))
+                self.pieces.append(tk.Frame(self.board,
+                                            background='grey30',
+                                            width=self.piece_pixel,
+                                            height=self.piece_pixel))
                 self.pieces[i].grid(row=r, column=c, padx=5, pady=5)
-                self.labels.append(tk.Label(self.board, text="", background='grey30'))
+                self.labels.append(tk.Label(self.board,
+                                            text="",
+                                            background='grey30'))
                 self.labels[i].grid(row=r, column=c)
             else:
-                self.pieces.append(tk.Frame(self.board, background='grey80', width=self.piece_pixel, height=self.piece_pixel))
+                self.pieces.append(tk.Frame(self.board,
+                                            background='grey80',
+                                            width=self.piece_pixel,
+                                            height=self.piece_pixel))
                 self.pieces[i].grid(row=r, column=c, padx=5, pady=5)
-                self.labels.append(tk.Label(self.board, text=str(val), background='grey80'))
+                self.labels.append(tk.Label(self.board,
+                                            text=str(val),
+                                            background='grey80'))
                 self.labels[i].grid(row=r, column=c)
 
     def add_buttons(self):
         tk.Frame(self.window, height=20).grid(row=1, column=0, columnspan=3)
-        tk.Button(self.window, text="prev", command=self.prev, padx=20, pady=10).grid(row=2, column=0, sticky=tk.E)
+        tk.Button(self.window, text="prev",
+                  command=self.prev, padx=20,
+                  pady=10).grid(row=2, column=0, sticky=tk.E)
         self.curr_step_label = tk.Label(self.window, text=str(self.curr_step))
         self.curr_step_label.grid(row=2, column=1)
-        tk.Button(self.window, text="next", command=self.next, padx=20, pady=10).grid(row=2, column=2, sticky=tk.W)
+        tk.Button(self.window, text="next", command=self.next,
+                  padx=20, pady=10).grid(row=2, column=2, sticky=tk.W)
 
     def add_data(self):
         message = "Complexity in time: {}\n".format(self.complexity_time)
         message += "Complexity in size: {}\n".format(self.complexity_size)
         message += "Number of move: {}\n".format(self.total_step)
         tk.Frame(self.window, height=20).grid(row=3, column=0, columnspan=3)
-        tk.Message(self.window, width=310, text=message).grid(row=4, column=0, columnspan=3, sticky=tk.W)
+        msg = tk.Message(self.window, width=310, text=message)
+        msg.grid(row=4, column=0, columnspan=3, sticky=tk.W)
 
     def prev(self):
         if self.curr_step == 0:

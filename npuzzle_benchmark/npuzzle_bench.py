@@ -4,6 +4,7 @@ import os
 from benchmark import Benchmark
 import subprocess
 
+
 def main():
     Benchmark()
 

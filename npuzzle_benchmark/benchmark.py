@@ -14,8 +14,8 @@ class Benchmark:
         self.size = 0
         self.iterations = 0
         self.check_arguments(sys.argv[1:])
-        # self.generate_puzzles()
-        # self.testing_puzzle(solvable="unsolvable", heuristic="hamming")
+        self.generate_puzzles()
+        self.testing_puzzle(solvable="unsolvable", heuristic="hamming")
         # self.testing_puzzle(solvable="solvable", heuristic="hamming")
         # self.testing_puzzle(solvable="solvable", heuristic="relaxed")
         self.testing_puzzle(solvable="solvable", heuristic="manhattan")
