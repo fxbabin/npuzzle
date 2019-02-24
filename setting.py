@@ -56,7 +56,8 @@ class Setting:
                 print(e)
             sys.exit(-1)
         if not Path(res.file).is_file():
-            raise Exception("Error : File \'{}\' is not a file !".format(res.file))
+            raise Exception("Error : File \'{}\' is not a file !"
+                            .format(res.file))
         self.algorithm = res.algorithm
         self.heuristic = res.heuristic
         self.file = res.file
@@ -87,11 +88,11 @@ class Setting:
                 for letter in line:
                     if letter not in "0123456789 \n":
                         raise Exception("Error : \'{}\' wrong character "
-                              "in puzzle line".format(letter))
+                                        "in puzzle line".format(letter))
                 line_split = re.sub(' +', ' ', line).split(' ')
                 if len(line_split) != self.size:
                     raise Exception("Error : line size differs from the "
-                          "indicated size of puzzle")
+                                    "indicated size of puzzle")
                 for letter in line_split:
                     self.start.append(int(letter))
 
