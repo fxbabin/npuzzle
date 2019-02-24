@@ -1,5 +1,6 @@
 import operator
 
+
 def hamming(puzzle, goal):
     count = -1
     for i, j in zip(puzzle, goal.puzzle):
