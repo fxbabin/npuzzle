@@ -25,6 +25,16 @@ python3 main.py -f puzzles/solvable.npuzzle
 python3 main.py -A greedy -H hamming -f puzzles/solvable.npuzzle
 ```
 
+## Benchmarking
+
+The benchmarking part was done using the time bash command (we used user time as elapsed can vary a lot if other processes are runing at the same time)
+
+### Unsolvable puzzles results
+
+| average (s) | minimum (s) | maximum (s) | standard deviation (s) |
+| 0.0408 | 0.04 | 0.045 | 0.0007 |
+
+
 ## Bonus
 
 3 bonus were done on this project:
