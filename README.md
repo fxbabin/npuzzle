@@ -29,11 +29,38 @@ python3 main.py -A greedy -H hamming -f puzzles/solvable.npuzzle
 
 The benchmarking part was done using the time bash command (we used user time as elapsed can vary a lot if other processes are runing at the same time)
 
-### Unsolvable puzzles results
+### Unsolvable puzzles results (size: 3, 100 occurences)
 
 | average (s) | minimum (s) | maximum (s) | standard deviation (s) |
+| -------- | -------------- | ----- | --- |
 | 0.0408 | 0.04 | 0.045 | 0.0007 |
 
+### Solvable puzzles results (size: 3, 100 occurences)
+
+#### A*
+ Heuristic | average (s) | minimum (s) | maximum (s) | standard deviation (s) |
+| --------- | ----------- | ----------- | ----------- | ---------------------- |
+| hamming   | 0.1205 | 0.041 | 0.848 | 0.1298 |
+| relaxed adjency | 0.1201 | 0.041 | 1.082 | 0.1647 |
+| manhattan | 0.1402 | 0.041 | 0.182 | 0.0193 |
+| linear conflict | 0.0522 | 0.041 | 0.227 | 0.0261 |
+
+#### Greedy
+| Heuristic | average (s) | minimum (s) | maximum (s) | standard deviation (s) |
+| --------- | ----------- | ----------- | ----------- | ---------------------- |
+| hamming | 0.0507 | 0.041 | 0.068 | 0.0057 |
+| relaxed adjency | 0.0509 | 0.041 | 0.088 | 0.0072 |
+| manhattan | 0.0498 | 0.041 | 0.063 | 0.0048 |
+| linear conflict | 0.0445 | 0.041 | 0.05 | 0.002 |
+
+#### uniform cost
+
+| Heuristic | average (s) | minimum (s) | maximum (s) | standard deviation (s) |
+| --------- | ----------- | ----------- | ----------- | ---------------------- |
+| hamming | 0.456 | 0.042 | 2.242 | 0.4887 |
+| relaxed adjency | 0.4415 | 0.042 | 2.14 | 0.4713 |
+| manhattan | 0.4392 | 0.041 | 2.174 | 0.4687 |
+| linear conflict | 0.4371 | 0.041 | 2.111 | 0.4654 |
 
 ## Bonus
 
