@@ -24,6 +24,13 @@ Examples:
 python3 main.py -f puzzles/solvable.npuzzle
 python3 main.py -A greedy -H hamming -f puzzles/solvable.npuzzle
 ```
+## Output example
+
+<img src="imgs/npuzzle_result.png" alt="drawing" width="400"/>
+
+## Graphical user interface
+
+<img src="imgs/nuzzle_gui.png" alt="drawing" width="400"/>
 
 ## Benchmarking
 
