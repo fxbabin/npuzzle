@@ -6,7 +6,7 @@ The npuzzle is a game consisting in moving a blank tile in order to reorder all 
 
 starting 8-puzzle             |  goal 8-puzzle
 :-------------------------:|:-------------------------:
-<img src="imgs/hands.png" alt="drawing" width="200"/>  |  <img src="imgs/contrasted_hands.png" alt="drawing" width="200"/>
+<img src="imgs/start_8puzzle.png" alt="drawing" width="200"/>  |  <img src="imgs/goal_8puzzle.png" alt="drawing" width="200"/>
 
 Usage:
 ```
