@@ -1,3 +1,6 @@
+### Status
+[![Build Status](https://travis-ci.org/fxbabin/npuzzle.png)](https://travis-ci.org/fxbabin/npuzzle)
+
 # npuzzle
 
 Npuzzle is a 42 project where you have to propose a solver for any npuzzle (most known npuzzles are 8-puzzles and 15-puzzles). This project was realized with [terngkub](https://github.com/terngkub).
