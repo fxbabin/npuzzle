@@ -1,4 +1,3 @@
-### Status
 [![Build Status](https://travis-ci.org/fxbabin/npuzzle.png)](https://travis-ci.org/fxbabin/npuzzle)
 
 # npuzzle
