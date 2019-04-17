@@ -19,7 +19,7 @@ The program must work on any size. But factually, the program will limited by th
 
 Usage:
 ```
-python3 main.py [-A astar|uniform|greedy] [-H hamming|manhattan|linear] [-g] -f puzzle_file
+python3 main.py [-A astar|uniform|greedy] [-H hamming|relaxed|manhattan|linear] [-g] -f puzzle_file
 ```
 
 Examples:
